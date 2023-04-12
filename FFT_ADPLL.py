@@ -2,7 +2,7 @@
 
 """
 Created on março 17 14:17:40 2023
-@author: vieirafilho
+@author: Ânderson Felipe Weschenfelder
 """
 import matplotlib.pyplot as plt
 import numpy as np

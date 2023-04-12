@@ -2,7 +2,7 @@
 
 """
 Created on março 20 09:04:46 2023
-@author: vieirafilho
+@author: Ânderson F.W
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -11,18 +11,18 @@ from scipy import signal
 
 # Definir as constantes do TDC
 
-# Para demostração
-# delay = 0.1 # tempo de delay
-# f_ref = 1 / 1.6 # frequência de referência
-# f_clk = 2 * f_ref # frequência do clock DCO
-# n_bits = int(1 / f_clk / delay)  # número de bits de saída / estágios do TDC
-# time_simulation = 1.5 * 1 / f_ref  # tempo de simulação do TDC
-
-delay = 1e-9  # tempo de delay
-f_ref = 40e6  # frequência de referência
-f_clk = 50e6  # frequência do clock DCO
+#Para demostração
+delay = 0.1 # tempo de delay
+f_ref = 1 / 1.6 # frequência de referência
+f_clk = 2 * f_ref # frequência do clock DCO
 n_bits = int(1 / f_clk / delay)  # número de bits de saída / estágios do TDC
 time_simulation = 1.5 * 1 / f_ref  # tempo de simulação do TDC
+
+# delay = 1e-12  # tempo de delay
+# f_ref = 40e6  # frequência de referência
+# f_clk = 2.4e9  # frequência do clock DCO
+# n_bits = int(1 / f_clk / delay)  # número de bits de saída / estágios do TDC
+# time_simulation = 1.5 * 1 / f_ref  # tempo de simulação do TDC
 
 print("número de bits:", n_bits)
 
@@ -45,8 +45,8 @@ for i in range(len(t)):
 print("valor de sáida do TDC em bits: ", tdc_bits)
 
 # Plotar os resultados
-norm = 1e6  # valor de normalização do tempo
-time = "us"  # string de texto do eixo de tempo
+norm = 1e9  # valor de normalização do tempo
+time = "ns"  # string de texto do eixo de tempo
 
 # plot dos resultados binários
 if n_bits < 10:
@@ -63,7 +63,7 @@ if n_bits < 10:
     plt.ylabel('Saída do TDC (bits)')
 
 # Reconstrução do sinal a partir do valor do TDC
-print('Frequência do sinal TDC:{}'.format(1 / (delay * n_bits) / norm), 'MHz')
+print('Frequência do sinal TDC:{}'.format(1 / (delay * n_bits) / norm), 'GHz')
 amp_tdc = np.zeros(2 * n_bits)  # vetor de amplitudes do sinal com o dobro do tamanho para mostrar dois peridos
 amp_tdc[0:n_bits] = tdc_bits  # copia o valor binarios para a primeira metade
 amp_tdc[n_bits:] = tdc_bits  # copia o valor binario para a segunda metade

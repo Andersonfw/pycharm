@@ -124,7 +124,7 @@ def dft(x_n):
 
 
 if __name__ == "__main__":
-    Fs = 100  # taxa de amostragem
+    Fs = 1000  # taxa de amostragem
     Ts = 1.00 / Fs  # periodo de amostragem
     Freq_resolution = 0.5  # frequência de resolução da DFT
     t = np.arange(0, 1 / Freq_resolution, Ts)  # vetor de tempo
@@ -140,7 +140,7 @@ if __name__ == "__main__":
     length = len(x1_n)  # Set the length of the white noise signal
     # Set the mean and standard deviation of the white noise distribution
     mean = 0
-    std_dev = 0
+    std_dev = 0#0.5
     white_noise = np.random.normal(mean, std_dev, length)
 
     x = x1_n + x2_n + white_noise
@@ -149,10 +149,10 @@ if __name__ == "__main__":
     k = np.arange(size_x)  # vetor em k
     T = size_x / Fs  # resolução de frequência = 1Hz
     frq = k / T  # os dois lados do vetor de frequencia
-    # frq = frq[range(int(size_x / 2))]  # apenas um lado
+    frq = frq[range(int(size_x / 2))]  # apenas um lado
 
     X = np.fft.fft(x) / size_x  # calculo da fft e normalização por n
-    # X = X[range(int(size_x / 2))]
+    X = X[range(int(size_x / 2))]
 
     X_k = dft(x)
     mod = Modulo(X_k, 'SSB')
@@ -189,4 +189,5 @@ if __name__ == "__main__":
     print("Encerando a simulação da DFT em: ", stopTime.strftime("%H:%M:%S"))
     print("Duração da simulação: ", diftime.total_seconds())
 
+    plt.tight_layout()
     plt.show()
